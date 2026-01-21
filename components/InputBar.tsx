@@ -64,7 +64,7 @@ export default function InputBar({ onSend, isLoading }: InputBarProps) {
           />
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="absolute left-3 bottom-2.5 p-1.5 text-gray-400 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-200 transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="flex-none p-2 text-gray-400 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-200 transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 mb-1 ml-1"
             disabled={isLoading}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -83,7 +83,7 @@ export default function InputBar({ onSend, isLoading }: InputBarProps) {
 
           <textarea
             ref={textareaRef}
-            className="w-full max-h-[200px] bg-transparent border-0 focus:ring-0 focus:outline-none resize-none py-3 pr-12 pl-10 text-base leading-relaxed placeholder-gray-500 dark:text-gray-100 dark:placeholder-gray-400"
+            className="flex-1 max-h-[200px] bg-transparent border-0 focus:ring-0 focus:outline-none resize-none py-3 pr-10 pl-2 text-base leading-relaxed placeholder-gray-500 dark:text-gray-100 dark:placeholder-gray-400"
             placeholder="Ask anything"
             rows={1}
             value={input}
