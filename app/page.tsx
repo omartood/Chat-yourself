@@ -3,11 +3,13 @@
 import { useState } from "react";
 import ChatBox from "../components/ChatBox";
 import InputBar from "../components/InputBar";
+import Sidebar from "../components/Sidebar";
 import { MessageRole } from "../components/Message";
 
 export default function Home() {
   const [messages, setMessages] = useState<{ role: MessageRole; content: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleSend = async (text: string, file?: File) => {
     // Add user message
@@ -60,26 +62,51 @@ export default function Home() {
     }
   };
 
+  const handleNewChat = () => {
+    setMessages([]);
+    setSidebarOpen(false); // Close sidebar on mobile
+  };
+
   return (
-    <main className="flex flex-col h-screen bg-white dark:bg-[#212121]">
-      {/* Header */}
-      <header className="flex-none h-14 flex items-center justify-between px-4 border-b border-gray-100 bg-white z-10 dark:bg-[#212121] dark:border-white/10">
-        <div className="flex items-center space-x-2">
-           <span className="font-semibold text-gray-700 dark:text-gray-100">Clone-Yourself</span>
-           <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full dark:bg-gray-800 dark:text-gray-300"></span>
+    <div className="flex h-screen bg-white dark:bg-[#212121]">
+      <Sidebar 
+        isOpen={sidebarOpen} 
+        onClose={() => setSidebarOpen(false)} 
+        onNewChat={handleNewChat}
+      />
+
+      <main className="flex-1 flex flex-col h-full relative overflow-hidden transition-all duration-300">
+        {/* Header */}
+        <header className="flex-none h-14 flex items-center justify-between px-4 border-b border-gray-100 bg-white z-10 dark:bg-[#212121] dark:border-white/10">
+          <div className="flex items-center space-x-3">
+             <button 
+               onClick={() => setSidebarOpen(true)}
+               className="md:hidden p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+             >
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                 <line x1="3" y1="12" x2="21" y2="12"></line>
+                 <line x1="3" y1="6" x2="21" y2="6"></line>
+                 <line x1="3" y1="18" x2="21" y2="18"></line>
+               </svg>
+             </button>
+             <div className="flex items-center space-x-2">
+                <span className="font-semibold text-gray-700 dark:text-gray-100">Clone-Yourself</span>
+                <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full dark:bg-gray-800 dark:text-gray-300"></span>
+             </div>
+          </div>
+          <div className="text-sm text-gray-400 dark:text-gray-500">Model: Memvid-Hybrid</div>
+        </header>
+
+        {/* Chat Area */}
+        <div className="flex-1 overflow-hidden flex flex-col relative w-full dark:bg-[#212121]">
+          <ChatBox messages={messages} isLoading={isLoading} />
         </div>
-        <div className="text-sm text-gray-400 dark:text-gray-500">Model: Memvid-Hybrid</div>
-      </header>
 
-      {/* Chat Area */}
-      <div className="flex-1 overflow-hidden flex flex-col relative w-full dark:bg-[#212121]">
-        <ChatBox messages={messages} isLoading={isLoading} />
-      </div>
-
-      {/* Input Area */}
-      <div className="flex-none w-full bg-white z-20 dark:bg-[#212121]">
-        <InputBar onSend={handleSend} isLoading={isLoading} />
-      </div>
-    </main>
+        {/* Input Area */}
+        <div className="flex-none w-full bg-white z-20 dark:bg-[#212121]">
+          <InputBar onSend={handleSend} isLoading={isLoading} />
+        </div>
+      </main>
+    </div>
   );
 }
