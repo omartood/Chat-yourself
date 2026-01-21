@@ -1,6 +1,6 @@
 # Clone-Yourself AI
 
-A premium, frontend-first AI interface built with **Next.js 16** and **Memvid**. Designed to provide a polished, "ChatGPT-like" experience with powerful long-term memory capabilities.
+A premium, interface built with **Next.js 16** and **Memvid**. Designed to provide a polished, "ChatGPT-like" experience with powerful long-term memory capabilities.
 
 ## ✨ Features
 
