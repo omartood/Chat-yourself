@@ -25,6 +25,9 @@ export async function POST(req: NextRequest) {
                "Tip: I can answer questions about content from PDFs, documents, and files you share with me!";
     }
 
+    // Remove source citations like [Source #1], [Source #1, #2], etc.
+    answer = answer.replace(/\[Source\s*#?\d+(?:,\s*#?\d+)*\]/g, '').trim();
+
     // Simulate streaming for the frontend
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
