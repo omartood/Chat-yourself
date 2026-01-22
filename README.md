@@ -1,4 +1,4 @@
-# Clone-Yourself AI 🤖
+# Chat-Yourself AI 🤖
 
 A premium AI-powered chat interface with **long-term memory** capabilities. Built with Next.js 16 and Memvid, this application allows you to upload documents and have intelligent conversations based on their content.
 
@@ -66,8 +66,8 @@ A premium AI-powered chat interface with **long-term memory** capabilities. Buil
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/omartood/Clone-yourself.git
-   cd Clone-yourself
+   git clone https://github.com/omartood/Chat-yourself.git
+   cd Chat-yourself
    ```
 
 2. **Install dependencies**:
@@ -147,7 +147,7 @@ npx memvid find knowledge.mv2 --query "your search term"
 ## 📂 Project Structure
 
 ```
-Clone-yourself/
+Chat-yourself/
 ├── app/
 │   ├── api/
 │   │   ├── chat/

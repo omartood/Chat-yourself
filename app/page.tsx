@@ -111,7 +111,7 @@ export default function Home() {
                </svg>
              </button>
              <div className="flex items-center space-x-2">
-                <span className="font-semibold text-gray-700 dark:text-gray-100">Clone-Yourself</span>
+                <span className="font-semibold text-gray-700 dark:text-gray-100">Chat-Yourself</span>
                 <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full dark:bg-gray-800 dark:text-gray-300"></span>
              </div>
           </div>
