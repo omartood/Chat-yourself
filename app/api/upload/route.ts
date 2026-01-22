@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       // Assumes we are in project root
       // Ignoring vector-compression flag for speed/simplicity unless required
       console.log(`Ingesting ${tempPath} into knowledge.mv2...`);
-      const { stdout, stderr } = await execAsync(`npx memvid put knowledge.mv2 --input "${tempPath}"`);
+      const { stdout, stderr } = await execAsync(`npx memvid put knowledge.mv2 --input "${tempPath}" --enable-embedding`);
       console.log('Memvid output:', stdout);
       if (stderr) console.error('Memvid stderr:', stderr);
 

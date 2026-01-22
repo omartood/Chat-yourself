@@ -12,7 +12,10 @@ export async function POST(req: NextRequest) {
     
     // Perform RAG/Answer via Memvid
     // This handles context retrieval + LLM synthesis
-    const result = await mem.ask(query);
+    const result = await mem.ask(query, {
+      model: 'gemini-1.5-flash',
+      modelApiKey: process.env.GEMINI_API_KEY,
+    });
     const answer = result.answer;
 
     // Simulate streaming for the frontend

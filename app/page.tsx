@@ -12,9 +12,14 @@ export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleSend = async (text: string, file?: File) => {
-    // Add user message
-    const newMessages = [...messages, { role: "user" as MessageRole, content: text }];
-    setMessages(newMessages);
+    // Add user message only if there's text
+    const newMessages = text.trim() 
+      ? [...messages, { role: "user" as MessageRole, content: text }]
+      : messages;
+    
+    if (text.trim()) {
+      setMessages(newMessages);
+    }
     setIsLoading(true);
 
     try {
@@ -26,6 +31,22 @@ export default function Home() {
           body: formData,
         });
         if (!uploadRes.ok) throw new Error('File upload failed');
+        
+        // If only uploading file without text, show success message
+        if (!text.trim()) {
+          setMessages((prev) => [...prev, { 
+            role: "assistant" as MessageRole, 
+            content: "✓ File uploaded successfully! You can now ask questions about it." 
+          }]);
+          setIsLoading(false);
+          return;
+        }
+      }
+
+      // Skip chat if no text content
+      if (!text.trim()) {
+        setIsLoading(false);
+        return;
       }
 
       const response = await fetch('/api/chat', {
